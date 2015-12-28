@@ -14,7 +14,7 @@ class __table_class__ extends Migration {
 			$table->increments('id');
 			$table->unsignedInteger('__parent_class___id');
 			$table->string('locale');
-			$table->boolean('default');
+			$table->boolean('default')->default(false);
 			$table->timestamps();
 
 			$table->foreign('__parent_class___id')->references('id')->on('__parent_class__s');
