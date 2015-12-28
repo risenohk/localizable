@@ -109,6 +109,6 @@ class GeneratorCommand extends Command
      */
     private function getMigrationPath()
     {
-        return base_path() . '/database/migrations/' . date('Y_m_d', time()) . '_' . substr((string) time(), 4, 6) . '_' . $this->getTableName() . '.php';
+        return base_path() . '/database/migrations/' . date('Y_m_d', time()) . '_' . substr((string) time(), 4, 6) . '_create_' . $this->getTableName() . '_table.php';
     }
 }
