@@ -1,0 +1,29 @@
+<?php
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+class __table_class__ extends Migration {
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('__table__', function(Blueprint $table)
+		{
+			$table->increments('id');
+			$table->string('locale');
+			$table->boolean('default');
+			$table->timestamps();
+		});
+	}
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::drop('__table__');
+	}
+}
