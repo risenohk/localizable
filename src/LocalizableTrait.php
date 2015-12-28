@@ -28,11 +28,9 @@ trait LocalizableTrait
     {
         $this->translatePropertyChecks();
 
-        $fields = collect($data)->filter(function ($field) {
-            return in_array($field, $this->localizeFields);
-        });
+        $fields = collect($data)->only($this->localizeFields);
 
-        return $this->translate($locale)->fill($fields)->save();
+        return $this->translate($locale)->fill($fields->toArray())->save();
     }
 
     /**
