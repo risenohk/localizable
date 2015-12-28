@@ -74,7 +74,7 @@ trait LocalizableTrait
 
         $localize->locale = $locale;
 
-        $this->translations()->save($localize);
+        $this->localizations()->save($localize);
 
         return $localize;
     }
