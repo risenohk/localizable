@@ -68,7 +68,7 @@ class GeneratorCommand extends Command
 
     private function replaceClassName(&$stub)
     {
-        $stub = str_replace('__table_class__', $this->getTableName(), $stub);
+        $stub = str_replace('__table_class__', $this->getTableClass(), $stub);
 
         return $this;
     }
@@ -109,6 +109,6 @@ class GeneratorCommand extends Command
      */
     private function getMigrationPath()
     {
-        return base_path() . '/database/migrations/' . date('Y_m_d', time()) . '_' . substr((string) time(), 4, 6) . $this->getTableName() . '.php';
+        return base_path() . '/database/migrations/' . date('Y_m_d', time()) . '_' . substr((string) time(), 4, 6) . '_' . $this->getTableName() . '.php';
     }
 }
