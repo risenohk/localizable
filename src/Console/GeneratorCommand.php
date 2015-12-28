@@ -59,13 +59,19 @@ class GeneratorCommand extends Command
         $content = $this->file->get($this->getStubPath());
 
         $this->replaceClassName($content)
-             ->replaceTableName($content);
+             ->replaceTableName($content)
+             ->replaceParentClass($content);
 
         $this->file->put($migrationPath, $content);
 
         $this->output->success('Migration file : ' . $migrationPath);
     }
 
+    /**
+     * @param $stub
+     *
+     * @return $this
+     */
     private function replaceClassName(&$stub)
     {
         $stub = str_replace('__table_class__', $this->getTableClass(), $stub);
@@ -73,6 +79,23 @@ class GeneratorCommand extends Command
         return $this;
     }
 
+    /**
+     * @param $stub
+     *
+     * @return $this
+     */
+    private function replaceParentClass(&$stub)
+    {
+        $stub = str_replace('__parent_class__', $this->argument('table'), $stub);
+
+        return $this;
+    }
+
+    /**
+     * @param $stub
+     *
+     * @return $this
+     */
     private function replaceTableName(&$stub)
     {
         $stub = str_replace('__table__', $this->getTableName(), $stub);
