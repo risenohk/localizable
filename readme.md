@@ -1,4 +1,5 @@
 ## Laravel Localizable
+[![Latest Stable Version](https://poser.pugx.org/riseno/localizable/v/stable)](https://packagist.org/packages/riseno/localizable) [![Total Downloads](https://poser.pugx.org/riseno/localizable/downloads)](https://packagist.org/packages/riseno/localizable) [![License](https://poser.pugx.org/riseno/localizable/license)](https://packagist.org/packages/riseno/localizable)
 
 A small plugin for managing multi-language in database table.
 
