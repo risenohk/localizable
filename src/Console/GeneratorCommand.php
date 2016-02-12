@@ -22,7 +22,7 @@ class GeneratorCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'riseno:localizable:generate {table}';
+    protected $signature = 'riseno:localizable:generate {table} {-m}';
 
     /**
      * @var string
@@ -46,9 +46,9 @@ class GeneratorCommand extends Command
      */
     public function __construct(Filesystem $file)
     {
-        $this->file = $file;
-
         parent::__construct();
+
+        $this->file = $file;
     }
 
     /**
@@ -67,6 +67,87 @@ class GeneratorCommand extends Command
         $this->file->put($migrationPath, $content);
 
         $this->output->success('Migration file : ' . $migrationPath);
+
+        if ($this->option('m')) {
+
+            $modelPath = $this->getModelPath();
+
+            $content = $this->file->get($this->getModelStubPath());
+
+            $this->replaceModelClassName($content)
+                ->replaceModelClassMethod($content)
+                ->replaceModelParentClass($content)
+                ->replaceModelField($content);
+
+            $this->file->put($modelPath, $content);
+
+            $this->output->success('Model file : ' . $modelPath);
+        }
+
+    }
+
+    /**
+     * @return string
+     */
+    private function getModelPath()
+    {
+        return base_path().'/app/'.$this->getModelClassName().'.php';
+    }
+
+    /**
+     * @return string
+     */
+    private function getModelClassName()
+    {
+        return studly_case($this->argument('table') . '_' . $this->suffix);
+    }
+
+    /**
+     * @param $stub
+     *
+     * @return $this
+     */
+    private function replaceModelClassName(&$stub)
+    {
+        $stub = str_replace('__class__', $this->getModelClassName(), $stub);
+
+        return $this;
+    }
+
+    /**
+     * @param $stub
+     *
+     * @return $this
+     */
+    private function replaceModelClassMethod(&$stub)
+    {
+        $stub = str_replace('__method__', strtolower($this->argument('table')), $stub);
+
+        return $this;
+    }
+
+    /**
+     * @param $stub
+     *
+     * @return $this
+     */
+    private function replaceModelField(&$stub)
+    {
+        $stub = str_replace('__field__', strtolower($this->argument('table')), $stub);
+
+        return $this;
+    }
+
+    /**
+     * @param $stub
+     *
+     * @return $this
+     */
+    private function replaceModelParentClass(&$stub)
+    {
+        $stub = str_replace('__parent_class__', ucfirst($this->argument('table')), $stub);
+
+        return $this;
     }
 
     /**
@@ -127,6 +208,14 @@ class GeneratorCommand extends Command
     private function getStubPath()
     {
         return __DIR__ . '/../migrations/localizeTableStub.stub';
+    }
+
+    /**
+     * @return string
+     */
+    private function getModelStubPath()
+    {
+        return __DIR__ . '/../migrations/localizeModelStub.stub';
     }
 
     /**

@@ -13,7 +13,7 @@ class __table_class__ extends Migration {
 	{
 		Schema::create('__table__', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->unsignedInteger('__parent_class___id');
 			$table->string('locale');
 			$table->boolean('default')->default(false);

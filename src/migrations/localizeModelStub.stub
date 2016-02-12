@@ -1,0 +1,26 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+/**
+ * Class __class__.
+ */
+class __class__ extends Model
+{
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'locale',
+    ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function __method__()
+    {
+        return $this->belongsTo(__parent_class__::class, '__field___id', 'id');
+    }
+}
