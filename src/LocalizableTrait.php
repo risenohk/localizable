@@ -24,26 +24,26 @@ trait LocalizableTrait
      * @return bool
      * @throws \Exception
      */
-    public function saveTranslate($locale, $data)
+    public function saveLocalize($locale, $data)
     {
-        $this->translatePropertyChecks();
+        $this->localizationPropertyChecks();
 
         $fields = collect($data)->only($this->localizeFields);
 
-        return $this->translate($locale)->fill($fields->toArray())->save();
+        return $this->localize($locale)->fill($fields->toArray())->save();
     }
 
     /**
-     * Retrieve translation model by locale
+     * Retrieve localization model by locale
      *
      * @param string $locale localization code
      *
      * @return mixed
      * @throws \Exception
      */
-    public function translate($locale)
+    public function localize($locale)
     {
-        $this->translatePropertyChecks();
+        $this->localizationPropertyChecks();
 
         /*
          * Should only have one record per locale
@@ -53,20 +53,20 @@ trait LocalizableTrait
         })->first();
 
         if (! $localize) {
-            $localize = $this->newTranslation($locale);
+            $localize = $this->newLocalization($locale);
         }
 
         return $localize;
     }
 
     /**
-     * Create new translation record by locale
+     * Create new localization record by locale
      *
      * @param string $locale localization code
      *
      * @return Object
      */
-    protected function newTranslation($locale)
+    protected function newLocalization($locale)
     {
         $localize = new $this->localizeModel;
 
@@ -84,7 +84,7 @@ trait LocalizableTrait
      *
      * @throws \Exception
      */
-    private function translatePropertyChecks()
+    private function localizationPropertyChecks()
     {
         if (! property_exists($this, 'localizeModel')) {
             throw new Exception('Missing "localizeModel" property in the model');

@@ -14,6 +14,7 @@ use Illuminate\Filesystem\Filesystem;
 
 /**
  * Class GeneratorCommand
+ *
  * @package Riseno\Localizable\Console
  */
 class GeneratorCommand extends Command
@@ -31,7 +32,7 @@ class GeneratorCommand extends Command
     /**
      * @var string
      */
-    protected $suffix = 'translations';
+    protected $suffix = 'localizations';
 
     /**
      * @var \Illuminate\Filesystem\Filesystem
@@ -59,8 +60,8 @@ class GeneratorCommand extends Command
         $content = $this->file->get($this->getStubPath());
 
         $this->replaceClassName($content)
-             ->replaceTableName($content)
-             ->replaceParentClass($content);
+            ->replaceTableName($content)
+            ->replaceParentClass($content);
 
         $this->file->put($migrationPath, $content);
 
@@ -116,7 +117,7 @@ class GeneratorCommand extends Command
      */
     private function getTableClass()
     {
-        return 'Create' . ucfirst($this->argument('table')) . ucfirst($this->suffix) . 'Table';
+        return studly_case('create_' . $this->getTableName() . '_table');
     }
 
     /**
@@ -124,7 +125,7 @@ class GeneratorCommand extends Command
      */
     private function getStubPath()
     {
-        return __DIR__ . '/../migrations/localizeTableStub.txt';
+        return __DIR__ . '/../migrations/localizeTableStub.stub';
     }
 
     /**
@@ -132,6 +133,6 @@ class GeneratorCommand extends Command
      */
     private function getMigrationPath()
     {
-        return base_path() . '/database/migrations/' . date('Y_m_d', time()) . '_' . substr((string) time(), 4, 6) . '_create_' . $this->getTableName() . '_table.php';
+        return base_path() . '/database/migrations/' . date('Y_m_d', time()) . '_' . substr((string)time(), 4, 6) . '_create_' . $this->getTableName() . '_table.php';
     }
 }
