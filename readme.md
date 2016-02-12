@@ -26,7 +26,7 @@ php artisan riseno:localizable:generate user
 After generated migration file, open the migration file. Add any column that should be localized.
 
 ```php
-Schema::create('user_translations', function(Blueprint $table)
+Schema::create('user_localizations', function(Blueprint $table)
 {
 	$table->increments('id');
 	$table->unsignedInteger('user_id');
@@ -69,10 +69,10 @@ public function localizations()
 }
 ```
 
-Also generate the translation model for eloquent relationship.
+Also generate the localization model for eloquent relationship.
 
 ```bash
-php artisan make:model UserTranslation
+php artisan make:model UserLocalization
 ```
 
 ### Usage
@@ -80,15 +80,15 @@ php artisan make:model UserTranslation
 The trait has provided a generic method for accessing the localized data,
 
 ```php
-$user->translate('en_US');
+$user->localize('en_US');
 // or access value directly
-$user->translate('en_US')->name;
+$user->localize('en_US')->name;
 ```
 
 If you want to save / update the localized record
 
 ```php
-$user->saveTranslate('en_US', ['name' => 'Riseno']);
+$user->saveLocalize('en_US', ['name' => 'Riseno']);
 ```
 
 ### License
