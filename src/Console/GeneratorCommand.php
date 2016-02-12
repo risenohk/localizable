@@ -47,6 +47,7 @@ class GeneratorCommand extends Command
     public function __construct(Filesystem $file)
     {
         $this->file = $file;
+
         parent::__construct();
     }
 
