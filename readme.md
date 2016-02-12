@@ -56,7 +56,7 @@ class User extends Authenticatable
 And also two required properties
 
 ```php
-protected $localizeModel  = UserTranslations::class;
+protected $localizeModel  = UserLocalizations::class;
 protected $localizeFields = ['name'];
 ```
 
@@ -65,7 +65,7 @@ One more thing, add a localizations method
 ```php
 public function localizations()
 {
-    return $this->hasMany(UserTranslations::class, 'user_id', 'id');
+    return $this->hasMany(UserLocalizations::class, 'user_id', 'id');
 }
 ```
 
