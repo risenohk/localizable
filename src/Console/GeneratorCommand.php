@@ -22,7 +22,7 @@ class GeneratorCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'riseno:localizable:generate {table} {-m}';
+    protected $signature = 'riseno:localizable:generate {table} {--m}';
 
     /**
      * @var string
