@@ -48,6 +48,7 @@ Go to the model that you want to implement localizable function, and add this tr
 
 ```php
 use Riseno\Localizable\LocalizableTrait;
+
 class User extends Authenticatable
 {
     use LocalizableTrait;
@@ -67,12 +68,6 @@ public function localizations()
 {
     return $this->hasMany(UserLocalizations::class, 'user_id', 'id');
 }
-```
-
-Also generate the localization model for eloquent relationship.
-
-```bash
-php artisan make:model UserLocalization
 ```
 
 ### Usage
