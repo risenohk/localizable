@@ -32,7 +32,7 @@ class GeneratorCommand extends Command
     /**
      * @var string
      */
-    protected $suffix = 'localizations';
+    protected $suffix = 'localization';
 
     /**
      * @var \Illuminate\Filesystem\Filesystem
@@ -191,7 +191,7 @@ class GeneratorCommand extends Command
      */
     private function getTableName()
     {
-        return $this->argument('table') . '_' . $this->suffix;
+        return $this->argument('table') . '_' . $this->suffix . 's';
     }
 
     /**
