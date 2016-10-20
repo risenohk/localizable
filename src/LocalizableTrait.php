@@ -3,26 +3,24 @@
  * Created by PhpStorm.
  * User: ryanchan
  * Date: 28/12/2015
- * Time: 4:37 PM
+ * Time: 4:37 PM.
  */
-
 namespace Riseno\Localizable;
-
 
 use Exception;
 
 /**
- * Class LocalizableTrait
- * @package Riseno\Localizable
+ * Class LocalizableTrait.
  */
 trait LocalizableTrait
 {
     /**
      * @param string $locale localization code
-     * @param array $data
+     * @param array  $data
+     *
+     * @throws \Exception
      *
      * @return bool
-     * @throws \Exception
      */
     public function saveLocalize($locale, $data)
     {
@@ -34,12 +32,13 @@ trait LocalizableTrait
     }
 
     /**
-     * Retrieve localization model by locale
+     * Retrieve localization model by locale.
      *
      * @param string $locale localization code
      *
-     * @return mixed
      * @throws \Exception
+     *
+     * @return mixed
      */
     public function localize($locale)
     {
@@ -52,7 +51,7 @@ trait LocalizableTrait
             return $localize->locale === $locale;
         })->first();
 
-        if (! $localize) {
+        if (!$localize) {
             $localize = $this->newLocalization($locale);
         }
 
@@ -60,15 +59,15 @@ trait LocalizableTrait
     }
 
     /**
-     * Create new localization record by locale
+     * Create new localization record by locale.
      *
      * @param string $locale localization code
      *
-     * @return Object
+     * @return object
      */
     protected function newLocalization($locale)
     {
-        $localize = new $this->localizeModel;
+        $localize = new $this->localizeModel();
 
         $localize->locale = $locale;
 
@@ -86,15 +85,15 @@ trait LocalizableTrait
      */
     private function localizationPropertyChecks()
     {
-        if (! property_exists($this, 'localizeModel')) {
+        if (!property_exists($this, 'localizeModel')) {
             throw new Exception('Missing "localizeModel" property in the model');
         }
 
-        if (! property_exists($this, 'localizeFields')) {
+        if (!property_exists($this, 'localizeFields')) {
             throw new Exception('Missing "localizeFields" property in the model');
         }
 
-        if (! method_exists($this, 'localizations')) {
+        if (!method_exists($this, 'localizations')) {
             throw new Exception('Missing "localizations" method in the model');
         }
     }
