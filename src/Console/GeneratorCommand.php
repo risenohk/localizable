@@ -3,19 +3,15 @@
  * Created by PhpStorm.
  * User: ryanchan
  * Date: 28/12/2015
- * Time: 5:49 PM
+ * Time: 5:49 PM.
  */
-
 namespace Riseno\Localizable\Console;
-
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
 /**
- * Class GeneratorCommand
- *
- * @package Riseno\Localizable\Console
+ * Class GeneratorCommand.
  */
 class GeneratorCommand extends Command
 {
@@ -51,9 +47,7 @@ class GeneratorCommand extends Command
         $this->file = $file;
     }
 
-    /**
-     *
-     */
+
     public function handle()
     {
         $migrationPath = $this->getMigrationPath();
@@ -66,10 +60,9 @@ class GeneratorCommand extends Command
 
         $this->file->put($migrationPath, $content);
 
-        $this->output->success('Migration file : ' . $migrationPath);
+        $this->output->success('Migration file : '.$migrationPath);
 
         if ($this->option('m')) {
-
             $modelPath = $this->getModelPath();
 
             $content = $this->file->get($this->getModelStubPath());
@@ -81,9 +74,8 @@ class GeneratorCommand extends Command
 
             $this->file->put($modelPath, $content);
 
-            $this->output->success('Model file : ' . $modelPath);
+            $this->output->success('Model file : '.$modelPath);
         }
-
     }
 
     /**
@@ -99,7 +91,7 @@ class GeneratorCommand extends Command
      */
     private function getModelClassName()
     {
-        return studly_case($this->argument('table') . '_' . $this->suffix);
+        return studly_case($this->argument('table').'_'.$this->suffix);
     }
 
     /**
@@ -191,7 +183,7 @@ class GeneratorCommand extends Command
      */
     private function getTableName()
     {
-        return $this->argument('table') . '_' . $this->suffix . 's';
+        return $this->argument('table').'_'.$this->suffix.'s';
     }
 
     /**
@@ -199,7 +191,7 @@ class GeneratorCommand extends Command
      */
     private function getTableClass()
     {
-        return studly_case('create_' . $this->getTableName() . '_table');
+        return studly_case('create_'.$this->getTableName().'_table');
     }
 
     /**
@@ -207,7 +199,7 @@ class GeneratorCommand extends Command
      */
     private function getStubPath()
     {
-        return __DIR__ . '/../migrations/localizeTableStub.stub';
+        return __DIR__.'/../migrations/localizeTableStub.stub';
     }
 
     /**
@@ -215,7 +207,7 @@ class GeneratorCommand extends Command
      */
     private function getModelStubPath()
     {
-        return __DIR__ . '/../migrations/localizeModelStub.stub';
+        return __DIR__.'/../migrations/localizeModelStub.stub';
     }
 
     /**
@@ -223,6 +215,6 @@ class GeneratorCommand extends Command
      */
     private function getMigrationPath()
     {
-        return base_path() . '/database/migrations/' . date('Y_m_d', time()) . '_' . substr((string)time(), 4, 6) . '_create_' . $this->getTableName() . '_table.php';
+        return base_path().'/database/migrations/'.date('Y_m_d', time()).'_'.substr((string) time(), 4, 6).'_create_'.$this->getTableName().'_table.php';
     }
 }

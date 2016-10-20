@@ -3,18 +3,15 @@
  * Created by PhpStorm.
  * User: ryanchan
  * Date: 28/12/2015
- * Time: 4:20 PM
+ * Time: 4:20 PM.
  */
-
 namespace Riseno\Localizable;
-
 
 use Illuminate\Support\ServiceProvider;
 use Riseno\Localizable\Console\GeneratorCommand;
 
 /**
- * Class LocalizableServiceProvider
- * @package Riseno\Localizable
+ * Class LocalizableServiceProvider.
  */
 class LocalizableServiceProvider extends ServiceProvider
 {
